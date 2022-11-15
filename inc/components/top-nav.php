@@ -29,12 +29,12 @@
   <div class="col-12 mb-auto d-flex flex-wrap align-items-center justify-content-between upper">
     <!-- Navbar Brand -->
     <a href="<?php echo get_site_url(); ?>" class="p-0 navbar-brand">
-      <img class="d-none d-lg-block" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-lg.svg" alt="BSA Logo" />
-      <img class="d-lg-none" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="BSA Logo" />
+      <img class="d-none d-lg-block" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-lg.svg" alt="OA Logo" />
+      <img class="d-lg-none" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="OA Logo" />
     </a>
     <div class="text-logo d-none d-lg-block">
-      <h5>Boy Scouts of America</h5>
-      <h6 class="mb-0"><?php echo get_bloginfo('name'); ?></h6>
+      <h5 class="mb-0"><?php echo get_bloginfo('name'); ?></h5>
+      <h6>Order of the Arrow</h6>
     </div>
     <!-- Desktop Menu -->
     <div id="desktop-menu" class="collapse navbar-collapse ml-auto justify-content-end">
@@ -208,7 +208,7 @@
     <?php if (has_nav_menu('scouting-menu')) { ?>
     <div class="nav-item">
       <a data-toggle="collapse" data-target="#mobile-scouting-menu" aria-controls="mobile-scouting-menu" href="javascript:void(0);" class="d-flex align-items-center justify-content-between bg-blue-dark nav-link scouting-menu-toggler">
-        Scouting.org
+        Organization Links
         <i class="fa fa-chevron-down"></i>
       </a>
     </div>
