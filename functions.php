@@ -1,51 +1,5 @@
 <?php
-// Initial Setup
-function bsa_setup() {
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support('automatic-feed-links');
-
-	// Let WordPress manage the document title.
-	add_theme_support('title-tag');
-
-	// Enable support for Post Thumbnails on posts and pages.
-	add_theme_support('post-thumbnails');
-
-  // Make thumbnail sizes center crop the images
-	add_image_size('medium', get_option('medium_size_w'), get_option('medium_size_h'), array('center', 'center'));
-	add_image_size('large', get_option('large_size_w'), get_option('large_size_h'), array('center', 'center'));
-
-	// Register navigation menus
-	register_nav_menus(array(
-		'scouting-menu'   =>  __('Scouting Menu', 'bsa'),
-		'main-menu'   =>  __('Main Menu', 'bsa'),
-		'more-menu'   =>  __('More Menu', 'bsa'),
-    'footer-menu' => __('Footer Menu', 'bsa')
-	));
-
-	// Enable HTML5 modules
-	add_theme_support('html5', array(
-		'comment-form',
-		'comment-list',
-		'gallery',
-		'caption',
-		'search-form'
-	));
-
-	// Enable support for Post Formats.
-	add_theme_support('post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-		'gallery',
-		'audio'
-	));
-
-	// Add theme support for Custom Logo.
-	add_theme_support('custom-logo');
-}
-add_action('after_setup_theme', 'bsa_setup');
+// Initial Setup deleted
 
 // copied from wordpress.org
 add_action( 'wp_enqueue_scripts', 'bsa_scripts' );
