@@ -47,109 +47,22 @@ function bsa_setup() {
 }
 add_action('after_setup_theme', 'bsa_setup');
 
-// Scripts & Styles
-function bsa_scripts() {
-	// Load main stylesheet
-	wp_enqueue_style('style', get_stylesheet_directory_uri() . '/assets/css/style.min.css', [], filemtime(get_stylesheet_directory() . '/assets/css/style.min.css'));
-
-	// Popper.js
-	wp_enqueue_script('popper.js', get_template_directory_uri() . '/assets/js/vendor/popper.min.js', array('jquery'), filemtime(get_template_directory() . '/assets/js/vendor/popper.min.js'), true);
-
-  // Bootstrap JS
-  wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/assets/js/vendor/bootstrap.min.js', array('jquery', 'popper.js'), filemtime(get_template_directory() . '/assets/js/vendor/bootstrap.min.js'), true);
-
-  // Main JS
-  wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/main.min.js', array('jquery', 'popper.js', 'bootstrap-js'), filemtime(get_template_directory() . '/assets/js/main.min.js'), true);
+// copied from wordpress.org
+add_action( 'wp_enqueue_scripts', 'bsa_scripts' );
+function my_theme_enqueue_styles() {
+	$parenthandle = 'style';
+	$theme        = wp_get_theme();
+	wp_enqueue_style( $parenthandle,
+		get_template_directory_uri() . '/assets/css/style.min.css',
+		array(),  // If the parent theme code has a dependency, copy it to here.
+		$theme->parent()->get( 'Version' )
+	);
+	wp_enqueue_style( 'child-style',
+		get_stylesheet_uri(),
+		array( $parenthandle ),
+		$theme->get( 'Version' ) // This only works if you have Version defined in the style header.
+	);
 }
-add_action('wp_enqueue_scripts', 'bsa_scripts');
-
-// Sidebars
-function bsa_widgets_init() {
-	// Main Sidebars
-	register_sidebar(array(
-    'name' => __('Primary Sidebar', 'bsa'),
-    'id' => 'primary-sidebar'
-  ));
-  register_sidebar(array(
-    'name' => __('Page Sidebar', 'bsa'),
-		'id' => 'page-sidebar',
-		'before_title' => '<h5>',
-		'after_title' => '</h5>'
-	));
-	register_sidebar(array(
-    'name' => __('Single Sidebar', 'bsa'),
-		'id' => 'single-sidebar',
-		'before_title' => '<h5>',
-		'after_title' => '</h5>'
-	));
-
-	// Footer Sidebars
-	register_sidebar(array(
-		'name' => __('Footer Sidebar 1', 'bsa'),
-		'id' => 'footer-sidebar-1',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h5 class="d-flex justify-content-between align-items-center display-md-block alt">',
-		'after_title' => '<i class="d-md-none fa fa-chevron-down"></i></h5>'
-	));
-	register_sidebar(array(
-		'name' => __('Footer Sidebar 2', 'bsa'),
-		'id' => 'footer-sidebar-2',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h5 class="d-flex justify-content-between align-items-center display-md-block alt">',
-		'after_title' => '<i class="d-md-none fa fa-chevron-down"></i></h5>'
-	));
-	register_sidebar(array(
-		'name' => __('Footer Sidebar 3', 'bsa'),
-		'id' => 'footer-sidebar-3',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h5 class="d-flex justify-content-between align-items-center display-md-block alt">',
-		'after_title' => '<i class="d-md-none fa fa-chevron-down"></i></h5>'
-	));
-	register_sidebar(array(
-		'name' => __('Footer Sidebar 4', 'bsa'),
-		'id' => 'footer-sidebar-4',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h5 class="d-flex justify-content-between align-items-center display-md-block alt">',
-		'after_title' => '<i class="d-md-none fa fa-chevron-down"></i></h5>'
-	));
-
-	// Footer Links widget area
-	register_sidebar(array(
-		'name' => __('Footer Links', 'bsa'),
-		'id' => 'footer-links',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-	));
-}
-add_action('widgets_init', 'bsa_widgets_init');
-
-// Add favicon
-function bsa_favicon() {
-  if (!has_site_icon()) {
-    ?>
-    <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon.png" />
-    <?php
-  }
-}
-add_action('wp_head', 'bsa_favicon');
-
-// Include Trajan Pro typekit font
-function bsa_footer_scripts() {
-	?>
-	<link rel="stylesheet" href="https://use.typekit.net/zme6aqo.css">
-	<?php
-}
-add_action('wp_footer', 'bsa_footer_scripts');
-
-// Remove admin bar bump
-function bsa_remove_admin_bar_bump() {
-	remove_action('wp_head', '_admin_bar_bump_cb');
-}
-add_action('get_header', 'bsa_remove_admin_bar_bump');
 
 // Remove autop from text widget
 remove_filter('widget_text_content', 'wpautop');
