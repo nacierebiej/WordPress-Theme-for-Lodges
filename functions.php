@@ -18,28 +18,6 @@ function my_theme_enqueue_styles() {
 	);
 }
 
-// Remove autop from text widget
-remove_filter('widget_text_content', 'wpautop');
-
-// After switch theme actions
-require_once 'inc/lib/afterswitch/afterswitch.php';
-
-// Walkers
-require_once 'inc/lib/walkers/class-wp-bootstrap-navwalker.php';
-require_once 'inc/lib/walkers/class-wp-bootstrap-mobile-navwalker.php';
-require_once 'inc/lib/walkers/class-wp-bootstrap-dropdown-nav.php';
-
-// Add legacy theme upgrader in case BSA Updater is not installed
-if (!class_exists('BSA_Updater')) {
-	require_once 'inc/lib/upgrader/upgrader.php';
-}
-
-// OCDI Related functions
-require_once 'inc/lib/ocdi/ocdi.php';
-
-// Required plugins
-require_once 'inc/lib/tgmpa/tgmpa.php';
-
 // Theme settings page
 // require_once 'inc/lib/settings/settings.php';
 
