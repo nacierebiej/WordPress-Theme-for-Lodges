@@ -22,7 +22,7 @@
   --primary:#E9000A;
   --secondary:#515354;
   --success:#039b03;
-  --info:#E31837;
+  --info:#003F87;
   --warning:#ffb225;
   --danger:#ff6200;
   --light:#f2f2f2;
@@ -42,6 +42,8 @@
   --white:#fff;
   --critical:#d00;
   --militar:#2c592c;
+  --OA-dark-red:#650812;
+  --OA-red:#E31837;
   --breakpoint-xs:0;
   --breakpoint-sm:576px;
   --breakpoint-md:768px;
